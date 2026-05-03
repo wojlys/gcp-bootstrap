@@ -1,33 +1,37 @@
-name: Terraform Boostrap
+name: Terraform Bootstrap
 
 on:
-    push:
-        branches: 
-            - main
+  push:
+    branches:
+      - main
 
 env:
-    TF_CLOUD_ORGANIZATION: "wojlys-org"
-    TF_WORKSPACE: "gcp-bootstrap"
-    TF_DIRECTORY: "."
-    TF_API_TOKEN: ${{ secrets.TF_API_TOKEN }}
+  TF_CLOUD_ORGANIZATION: "wojlys-org"
+  TF_WORKSPACE: "gcp-bootstrap"
+  TF_DIRECTORY: "."
+  TF_API_TOKEN: ${{ secrets.TF_API_TOKEN }}
 
 jobs:
-    terraform:
-        runs-on: ubuntu-latest
-        steps:
-        - name: Upload configuration to HCP Terraform
-          id: upload
-          uses: hashicorp/tfc-workflows-github/actions/upload-configuration@v1.3.2
-          with:
-            workspace: ${{ env.TF_WORKSPACE }}
-            directory: ${{ env.TF_DIRECTORY }}
-            speculative: false
-        - name: Create run
-          uses: hashicorp/tfc-workflows-github/actions/create-run@v1.3.2
-          with:
-            workspace: ${{ env.TF_WORKSPACE }}
-            configuration_version: ${{ steps.upload.outputs.configuration.configuration_version_id }}
-            plan_only: true
+  terraform:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Upload configuration to HCP Terraform
+        id: upload
+        uses: hashicorp/tfc-workflows-github/actions/upload-configuration@v1.3.2
+        with:
+          workspace: ${{ env.TF_WORKSPACE }}
+          directory: ${{ env.TF_DIRECTORY }}
+          speculative: false
+
+      - name: Create run
+        uses: hashicorp/tfc-workflows-github/actions/create-run@v1.3.2
+        with:
+          workspace: ${{ env.TF_WORKSPACE }}
+          configuration_version: ${{ steps.upload.outputs.configuration_version_id }}
+          plan_only: true
 
 
-            
