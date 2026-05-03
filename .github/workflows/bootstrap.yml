@@ -9,6 +9,7 @@ env:
     TF_CLOUD_ORGANIZATION: "wojlys-org"
     TF_WORKSPACE: "gcp-bootstrap"
     TF_DIRECTORY: "."
+    TF_API_TOKEN: ${{ secrets.TF_API_TOKEN }}
 
 jobs:
     terraform:
