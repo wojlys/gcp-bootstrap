@@ -22,9 +22,8 @@ jobs:
             directory: ${{ env.TF_DIRECTORY }}
             speculative: false
         - name: Create run
-          uses: hashicorp/tfc-workflows-github/actions/create-run@1.3.2
+          uses: hashicorp/tfc-workflows-github/actions/create-run@v1.3.2
           with:
             workspace: ${{ env.TF_WORKSPACE }}
             configuration_version: ${{ steps.upload.outputs.configuration.configuration_version_id }}
             plan_only: true
-            
