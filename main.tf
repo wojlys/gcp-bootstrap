@@ -1,21 +1,18 @@
 terraform {
   required_providers {
     google = {
-        source = "hashicorp/google"
-        version = "~>6.0"
+      source  = "hashicorp/google"
+      version = "~>6.0"
+    }
+    random = {
+      source  = "hashicorp/random"
+      version = "~>3.8"
     }
   }
 }
 
 provider "google" {
-  project = "rss-bootstrap-nyww"
+  project = var.this_project
 }
 
-data "google_client_config" "current_config" {
-  
-}
 
-// create nothing
-output "project" {
-  value = data.google_client_config.current_config.project
-}
