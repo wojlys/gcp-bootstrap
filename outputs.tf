@@ -1,5 +1,5 @@
 output "infra_billing_accounts" {
-  value       = var.this_billing
+  value       = var.billing_accounts
   description = "Billing accounts for Infra projects"
 }
 

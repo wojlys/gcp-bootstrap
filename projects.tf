@@ -30,7 +30,7 @@ resource "google_project" "network" {
   name            = format("rss-network-%s", random_string.network_suffix.result)
   project_id      = format("rss-network-%s", random_string.network_suffix.result)
   folder_id       = var.parent_folder_id
-  billing_account = var.this_billing["network"]
+  billing_account = var.billing_accounts["network"]
   # allow terraform to delete project on destroy
   deletion_policy = "DELETE"
 
@@ -41,7 +41,7 @@ resource "google_project" "compute" {
   name            = format("rss-compute-%s", random_string.compute_suffix.result)
   project_id      = format("rss-compute-%s", random_string.compute_suffix.result)
   folder_id       = var.parent_folder_id
-  billing_account = var.this_billing["compute"]
+  billing_account = var.billing_accounts["compute"]
   # allow terraform to delete project on destroy
   deletion_policy = "DELETE"
 }

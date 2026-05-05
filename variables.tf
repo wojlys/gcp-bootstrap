@@ -1,15 +1,16 @@
 /* Organization variables */
-
 variable "organization_id" {
   type        = string
   default     = "272424585276"
   description = "ID of the organization"
 }
+
 variable "parent_folder_id" {
   type        = string
   default     = "529910092656"
   description = "Numeric ID of the GCP folder where TF should create projects"
 }
+
 
 
 
@@ -20,8 +21,7 @@ variable "this_project" {
   description = "Bootstrap project name"
 }
 
-
-variable "this_billing" {
+variable "billing_accounts" {
   type = object({
     network = string
     compute = string
@@ -31,3 +31,46 @@ variable "this_billing" {
 
 
 
+
+
+/* API variables */
+variable "network_project_apis" {
+  type = set(string)
+  default = [
+    "compute.googleapis.com",
+    "iam.googleapis.com",
+    "iamcredentials.googleapis.com",
+    "sts.googleapis.com",
+    "serviceusage.googleapis.com",
+    "cloudresourcemanager.googleapis.com"
+  ]
+  description = "Set of APIs required by the rss-network project"
+}
+
+variable "compute_project_apis" {
+  type = set(string)
+  default = [
+    "compute.googleapis.com",
+    "iam.googleapis.com",
+    "iamcredentials.googleapis.com",
+    "sts.googleapis.com",
+    "serviceusage.googleapis.com",
+    "cloudresourcemanager.googleapis.com"
+  ]
+  description = "Set of APIs required by the rss-compute project"
+}
+
+
+
+
+/* IAM variables */
+variable "network_sa_roles" {
+  type    = set(string)
+  default = ["roles/compute.networkAdmin", "roles/compute.securityAdmin"]
+}
+
+variable "compute_sa_roles" {
+  type    = set(string)
+  default = ["roles/compute.instanceAdmin.v1"]
+
+}
