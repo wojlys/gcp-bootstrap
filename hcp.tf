@@ -75,7 +75,7 @@ Method 1
 In this method we simply use tfe_variable in bootstrap project to create / seed information required by "child" projects in them.
 Child projects do not required TFE_TOKEN to access HCP Workspace variables.
 Terraform IaaC sees these as regular variables. 
-
+The type of variables MUST BE set to "terraform"
 */
 
 locals {
@@ -93,7 +93,7 @@ resource "tfe_variable" "rss_m1_vars_network" {
   for_each     = local.rss_vars_network
   key          = each.key
   value        = each.value
-  category     = "env"
+  category     = "terraform"
   workspace_id = tfe_workspace.gcp_network.id
 }
 
@@ -101,6 +101,6 @@ resource "tfe_variable" "rss_m1_vars_compute" {
   for_each     = local.rss_vars_compute
   key          = each.key
   value        = each.value
-  category     = "env"
+  category     = "terraform"
   workspace_id = tfe_workspace.gcp_compute.id
 }
