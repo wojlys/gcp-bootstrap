@@ -73,8 +73,6 @@ resource "google_service_account_iam_member" "sa_compute" {
 # -
 # Now, we need to add  roles required by project's SA to manage project's resources
 # -
-
-
 resource "google_project_iam_member" "sa_network" {
   for_each = var.network_sa_roles
   project  = google_project.network.project_id
